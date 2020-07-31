@@ -1,3 +1,7 @@
-export { ListTasksIn, ListTasksOut } from './listTasks';
-export { ResponsePendencyIn, ResponsePendencyOut } from './responsePendency';
-export { StartProcessIn, StartProcessOut } from './startProcess';
+export { CommitAttachmentIn, CommitAttachmentOut } from './commit-attachment';
+export { LinkAttachmentsIn, LinkAttachmentsOut } from './link-attachments';
+export { ListTasksIn, ListTasksOut } from './list-tasks';
+export { NewAttachmentIn, NewAttachmentOut } from './new-attachment';
+export { ResponsePendencyIn, ResponsePendencyOut } from './response-pendency';
+export { SearchTasksIn, SearchTasksOut } from './search-tasks';
+export { StartProcessIn, StartProcessOut } from './start-process';
