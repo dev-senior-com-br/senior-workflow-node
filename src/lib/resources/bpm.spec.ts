@@ -1,6 +1,13 @@
 import BPM from './bpm';
 import { SeniorApi } from '@seniorsistemas/senior-core';
-import { ListTasksIn, StartProcessIn, ResponsePendencyIn } from '../model';
+import {
+  ListTasksIn,
+  StartProcessIn,
+  ResponsePendencyIn,
+  CommitAttachmentIn,
+  LinkAttachmentsIn,
+  NewAttachmentIn,
+} from '../model';
 
 const request = jest.fn();
 const getUrlPath = jest.fn().mockImplementation((path: string, anonymous = false): string => {
@@ -13,7 +20,7 @@ const LIST_TASKS_IN: ListTasksIn = {
   limit: 100,
   kind: 'TASK',
   startTask: 0,
-  limitTask: 99999
+  limitTask: 99999,
 };
 
 const START_PROCESS_IN: StartProcessIn = {
@@ -27,7 +34,7 @@ const START_PROCESS_IN: StartProcessIn = {
   processInstanceID: 20,
   processVersion: 30,
   requester: 'me',
-  title: 'Title'
+  title: 'Title',
 };
 
 const RESPONSE_PENDENCY_IN: ResponsePendencyIn = {
@@ -36,14 +43,27 @@ const RESPONSE_PENDENCY_IN: ResponsePendencyIn = {
     businessData: 'business',
     flowExecutionData: {
       actionToExecute: 'action',
-      nextSubject: 'subject'
-    }
+      nextSubject: 'subject',
+    },
   },
   serviceFlowToken: {
     activityId: 10,
     processInstanceID: 20,
-    step: 30
-  }
+    step: 30,
+  },
+};
+
+const COMMIT_ATTACHMENT_IN: CommitAttachmentIn = {
+  id: 'my_id',
+};
+
+const LINK_ATTACHMENTS_IN: LinkAttachmentsIn = {
+  ids: ['my_id'],
+  processInstance: 10,
+};
+
+const NEW_ATTACHMENT_IN: NewAttachmentIn = {
+  name: 'my_file_name',
 };
 
 beforeEach(() => {
@@ -58,12 +78,12 @@ describe('BPM', () => {
     bpm.request = request;
     bpm.getUrlPath = getUrlPath;
     //Act
-    bpm.responsePendency(RESPONSE_PENDENCY_IN);
+    bpm.responsePendency({ ...RESPONSE_PENDENCY_IN });
     //Assert
     expect(request).toHaveBeenCalledWith({
       url: 'tests/actions/responsePendency/',
       method: 'POST',
-      data: RESPONSE_PENDENCY_IN,
+      data: { ...RESPONSE_PENDENCY_IN },
       headers: {
         authorization: null,
       },
@@ -76,12 +96,12 @@ describe('BPM', () => {
     bpm.request = request;
     bpm.getUrlPath = getUrlPath;
     //Act
-    bpm.startProcess(START_PROCESS_IN);
+    bpm.startProcess({ ...START_PROCESS_IN });
     //Assert
     expect(request).toHaveBeenCalledWith({
       url: 'tests/actions/startProcess/',
       method: 'POST',
-      data: START_PROCESS_IN,
+      data: { ...START_PROCESS_IN },
       headers: {
         authorization: null,
       },
@@ -94,12 +114,12 @@ describe('BPM', () => {
     bpm.request = request;
     bpm.getUrlPath = getUrlPath;
     //Act
-    bpm.listTasks(LIST_TASKS_IN);
+    bpm.listTasks({ ...LIST_TASKS_IN });
     //Assert
     expect(request).toHaveBeenCalledWith({
       url: 'tests/queries/listTasks/',
       method: 'POST',
-      data: LIST_TASKS_IN,
+      data: { ...LIST_TASKS_IN },
       headers: {
         authorization: null,
       },
@@ -123,5 +143,59 @@ describe('BPM', () => {
       },
     });
     expect(getUrlPath).toHaveBeenCalledWith('queries/searchTasks');
+  });
+  it('Should commitAttachment', () => {
+    //Arrange
+    const bpm = new BPM(new SeniorApi());
+    bpm.request = request;
+    bpm.getUrlPath = getUrlPath;
+    //Act
+    bpm.commitAttachment({ ...COMMIT_ATTACHMENT_IN });
+    //Assert
+    expect(request).toHaveBeenCalledWith({
+      url: 'tests/actions/commitAttachment/',
+      method: 'POST',
+      data: { ...COMMIT_ATTACHMENT_IN },
+      headers: {
+        authorization: null,
+      },
+    });
+    expect(getUrlPath).toHaveBeenCalledWith('actions/commitAttachment');
+  });
+  it('Should linkAttachments', () => {
+    //Arrange
+    const bpm = new BPM(new SeniorApi());
+    bpm.request = request;
+    bpm.getUrlPath = getUrlPath;
+    //Act
+    bpm.linkAttachments({ ...LINK_ATTACHMENTS_IN });
+    //Assert
+    expect(request).toHaveBeenCalledWith({
+      url: 'tests/actions/linkAttachments/',
+      method: 'POST',
+      data: { ...LINK_ATTACHMENTS_IN },
+      headers: {
+        authorization: null,
+      },
+    });
+    expect(getUrlPath).toHaveBeenCalledWith('actions/linkAttachments');
+  });
+  it('Should newAttachment', () => {
+    //Arrange
+    const bpm = new BPM(new SeniorApi());
+    bpm.request = request;
+    bpm.getUrlPath = getUrlPath;
+    //Act
+    bpm.newAttachment({ ...NEW_ATTACHMENT_IN });
+    //Assert
+    expect(request).toHaveBeenCalledWith({
+      url: 'tests/actions/newAttachment/',
+      method: 'POST',
+      data: { ...NEW_ATTACHMENT_IN },
+      headers: {
+        authorization: null,
+      },
+    });
+    expect(getUrlPath).toHaveBeenCalledWith('actions/newAttachment');
   });
 });

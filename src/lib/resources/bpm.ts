@@ -1,15 +1,7 @@
 import { RequestClient, SeniorApi } from '@seniorsistemas/senior-core';
 import { RequestReturn } from '@seniorsistemas/senior-core/dist/lib/model/RequestReturn';
 import { HttpMethod } from '@seniorsistemas/senior-core/dist/lib/model/HttpMethod';
-import {
-  ListTasksIn,
-  ListTasksOut,
-  ResponsePendencyIn,
-  ResponsePendencyOut,
-  StartProcessIn,
-  StartProcessOut,
-} from '../model';
-import { SearchTasksIn, SearchTasksOut } from '../model/searchTasks';
+import * as models from '../model';
 
 export default class BPM extends RequestClient {
   constructor(seniorApi: SeniorApi) {
@@ -18,10 +10,10 @@ export default class BPM extends RequestClient {
 
   /**
    * Action para responder uma pendencia
-   * @param {responsePendencyIn}
-   * @returns {Promise<RequestReturn<ResponsePendencyOut>>}
+   * @param {models.ResponsePendencyIn} responsePendencyIn
+   * @returns {Promise<RequestReturn<models.ResponsePendencyOut>>}
    */
-  responsePendency(responsePendencyIn: ResponsePendencyIn): Promise<RequestReturn<ResponsePendencyOut>> {
+  responsePendency(responsePendencyIn: models.ResponsePendencyIn): Promise<RequestReturn<models.ResponsePendencyOut>> {
     const clientOptions = {
       url: this.getUrlPath('actions/responsePendency'),
       method: HttpMethod.POST,
@@ -37,10 +29,10 @@ export default class BPM extends RequestClient {
 
   /**
    * Action para iniciar um processo
-   * @param {StartProcessIn}
-   * @returns {Promise<RequestReturn<StartProcessOut>>}
+   * @param {models.StartProcessIn} startProcessIn
+   * @returns {Promise<RequestReturn<models.StartProcessOut>>}
    */
-  startProcess(startProcessIn: StartProcessIn): Promise<RequestReturn<StartProcessOut>> {
+  startProcess(startProcessIn: models.StartProcessIn): Promise<RequestReturn<models.StartProcessOut>> {
     const clientOptions = {
       url: this.getUrlPath('actions/startProcess'),
       method: HttpMethod.POST,
@@ -56,10 +48,10 @@ export default class BPM extends RequestClient {
 
   /**
    * Query para listar tarefas na nova central de tarefas
-   * @param {ListTasksIn}
-   * @returns {Promise<RequestReturn<ListTasksOut>>}
+   * @param {models.ListTasksIn} listTasksIn
+   * @returns {Promise<RequestReturn<models.ListTasksOut>>}
    */
-  listTasks(listTasksIn: ListTasksIn): Promise<RequestReturn<ListTasksOut>> {
+  listTasks(listTasksIn: models.ListTasksIn): Promise<RequestReturn<models.ListTasksOut>> {
     const clientOptions = {
       url: this.getUrlPath('queries/listTasks'),
       method: HttpMethod.POST,
@@ -75,15 +67,72 @@ export default class BPM extends RequestClient {
 
   /**
    * Query para pesquisar as tasks
-   * @param {SearchTasksIn}
-   * @returns {Promise<RequestReturn<SearchTasksOut>>}
+   * @param {models.SearchTasksIn} searchTasksIn
+   * @returns {Promise<RequestReturn<models.SearchTasksOut>>}
    */
-  searchTasks(searchTasksIn: SearchTasksIn = {}): Promise<RequestReturn<SearchTasksOut>> {
+  searchTasks(searchTasksIn: models.SearchTasksIn = {}): Promise<RequestReturn<models.SearchTasksOut>> {
     const clientOptions = {
       url: this.getUrlPath('queries/searchTasks'),
       method: HttpMethod.POST,
       data: {
         ...searchTasksIn,
+      },
+      headers: {
+        authorization: this.seniorApi.accessToken,
+      },
+    };
+    return this.request(clientOptions);
+  }
+
+  /**
+   * Action que faz commit de um anexo movendo ele da área temporária para permanente
+   * @param {models.CommitAttachmentIn} commitAttachmentIn
+   * @returns {Promise<RequestReturn<models.CommitAttachmentOut>>}
+   */
+  commitAttachment(commitAttachmentIn: models.CommitAttachmentIn): Promise<RequestReturn<models.CommitAttachmentOut>> {
+    const clientOptions = {
+      url: this.getUrlPath('actions/commitAttachment'),
+      method: HttpMethod.POST,
+      data: {
+        ...commitAttachmentIn,
+      },
+      headers: {
+        authorization: this.seniorApi.accessToken,
+      },
+    };
+    return this.request(clientOptions);
+  }
+
+  /**
+   * Action que cria uma nova representação de um anexo do Workflow
+   * @param {models.NewAttachmentIn} newAttachmentIn
+   * @returns {Promise<models.RequestReturn<NewAttachmentOut>>}
+   */
+  newAttachment(newAttachmentIn: models.NewAttachmentIn): Promise<RequestReturn<models.NewAttachmentOut>> {
+    const clientOptions = {
+      url: this.getUrlPath('actions/newAttachment'),
+      method: HttpMethod.POST,
+      data: {
+        ...newAttachmentIn,
+      },
+      headers: {
+        authorization: this.seniorApi.accessToken,
+      },
+    };
+    return this.request(clientOptions);
+  }
+
+  /**
+   * Liga determinados anexos a uma instância de processo
+   * @param {models.LinkAttachmentsIn} linkAttachmentsIn
+   * @returns {Promise<RequestReturn<models.LinkAttachmentsOut>>}
+   */
+  linkAttachments(linkAttachmentsIn: models.LinkAttachmentsIn): Promise<RequestReturn<models.LinkAttachmentsOut>> {
+    const clientOptions = {
+      url: this.getUrlPath('actions/linkAttachments'),
+      method: HttpMethod.POST,
+      data: {
+        ...linkAttachmentsIn,
       },
       headers: {
         authorization: this.seniorApi.accessToken,
