@@ -1,7 +1,6 @@
 import BPM from './bpm';
 import { SeniorApi } from '@seniorsistemas/senior-core';
 import {
-  ListTasksIn,
   StartProcessIn,
   ResponsePendencyIn,
   CommitAttachmentIn,
@@ -13,15 +12,6 @@ const request = jest.fn();
 const getUrlPath = jest.fn().mockImplementation((path: string, anonymous = false): string => {
   return `tests/${path}/${anonymous ? 'anonymous/' : ''}`;
 });
-
-const LIST_TASKS_IN: ListTasksIn = {
-  groupBy: 'CATEGORY',
-  start: 0,
-  limit: 100,
-  kind: 'TASK',
-  startTask: 0,
-  limitTask: 99999,
-};
 
 const START_PROCESS_IN: StartProcessIn = {
   authorization: 'auth',
@@ -107,24 +97,6 @@ describe('BPM', () => {
       },
     });
     expect(getUrlPath).toHaveBeenCalledWith('actions/startProcess');
-  });
-  it('Should listTasks', () => {
-    //Arrange
-    const bpm = new BPM(new SeniorApi());
-    bpm.request = request;
-    bpm.getUrlPath = getUrlPath;
-    //Act
-    bpm.listTasks({ ...LIST_TASKS_IN });
-    //Assert
-    expect(request).toHaveBeenCalledWith({
-      url: 'tests/queries/listTasks/',
-      method: 'POST',
-      data: { ...LIST_TASKS_IN },
-      headers: {
-        authorization: null,
-      },
-    });
-    expect(getUrlPath).toHaveBeenCalledWith('queries/listTasks');
   });
   it('Should searchTasks', () => {
     //Arrange

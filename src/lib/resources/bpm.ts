@@ -47,25 +47,6 @@ export default class BPM extends RequestClient {
   }
 
   /**
-   * Query para listar tarefas na nova central de tarefas
-   * @param {models.ListTasksIn} listTasksIn
-   * @returns {Promise<RequestReturn<models.ListTasksOut>>}
-   */
-  listTasks(listTasksIn: models.ListTasksIn): Promise<RequestReturn<models.ListTasksOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/listTasks'),
-      method: HttpMethod.POST,
-      data: {
-        ...listTasksIn,
-      },
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
-    return this.request(clientOptions);
-  }
-
-  /**
    * Query para pesquisar as tasks
    * @param {models.SearchTasksIn} searchTasksIn
    * @returns {Promise<RequestReturn<models.SearchTasksOut>>}
