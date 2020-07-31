@@ -9,6 +9,7 @@ import {
   StartProcessIn,
   StartProcessOut,
 } from '../model';
+import { SearchTasksIn, SearchTasksOut } from '../model/searchTasks';
 
 export default class BPM extends RequestClient {
   constructor(seniorApi: SeniorApi) {
@@ -64,6 +65,25 @@ export default class BPM extends RequestClient {
       method: HttpMethod.POST,
       data: {
         ...listTasksIn,
+      },
+      headers: {
+        authorization: this.seniorApi.accessToken,
+      },
+    };
+    return this.request(clientOptions);
+  }
+
+  /**
+   * Query para pesquisar as tasks
+   * @param {SearchTasksIn}
+   * @returns {Promise<RequestReturn<SearchTasksOut>>}
+   */
+  searchTasks(searchTasksIn: SearchTasksIn = {}): Promise<RequestReturn<SearchTasksOut>> {
+    const clientOptions = {
+      url: this.getUrlPath('queries/searchTasks'),
+      method: HttpMethod.POST,
+      data: {
+        ...searchTasksIn,
       },
       headers: {
         authorization: this.seniorApi.accessToken,

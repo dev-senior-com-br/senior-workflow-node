@@ -106,4 +106,22 @@ describe('BPM', () => {
     });
     expect(getUrlPath).toHaveBeenCalledWith('queries/listTasks');
   });
+  it('Should searchTasks', () => {
+    //Arrange
+    const bpm = new BPM(new SeniorApi());
+    bpm.request = request;
+    bpm.getUrlPath = getUrlPath;
+    //Act
+    bpm.searchTasks();
+    //Assert
+    expect(request).toHaveBeenCalledWith({
+      url: 'tests/queries/searchTasks/',
+      method: 'POST',
+      data: {},
+      headers: {
+        authorization: null,
+      },
+    });
+    expect(getUrlPath).toHaveBeenCalledWith('queries/searchTasks');
+  });
 });
