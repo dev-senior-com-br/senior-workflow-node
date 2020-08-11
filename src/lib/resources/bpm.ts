@@ -1,7 +1,5 @@
-import { RequestClient, SeniorApi } from '@seniorsistemas/senior-core';
-import { RequestReturn } from '@seniorsistemas/senior-core/dist/lib/model/RequestReturn';
-import { HttpMethod } from '@seniorsistemas/senior-core/dist/lib/model/HttpMethod';
 import * as models from '../model';
+import { SeniorApi, RequestClient, HttpMethod, RequestReturn } from '@seniorsistemas/senior-core';
 
 export default class BPM extends RequestClient {
   constructor(seniorApi: SeniorApi) {
