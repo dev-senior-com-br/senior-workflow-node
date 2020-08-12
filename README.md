@@ -34,3 +34,12 @@ PLATFORM_PASS=
 # Id da instancia do processo
 PLATFORM_BPM_PROCESS_INSTANCE_ID=
 ```
+
+#### Dica
+
+Você pode criar um arquivo na raiz do projeto chamado `.env` e nele informar as variaveis de ambiente, conforme abaixo:
+```
+PLATFORM_USER=usuario
+PLATFORM_PASS=senha
+PLATFORM_BPM_PROCESS_INSTANCE_ID=id_do_processo
+```

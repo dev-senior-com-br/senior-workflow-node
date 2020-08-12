@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { PlatformAppsApi } = require("../dist");
 const { put } = require("axios");
 
