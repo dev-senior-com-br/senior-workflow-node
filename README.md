@@ -8,6 +8,17 @@ Esta biblioteca facilita o uso das APIs de aplicativos da plataforma da Senior S
 npm install --save @seniorsistemas/senior-platform-apps
 ```
 
+### Ambiente
+Atualmente o ambiente padrão para o desenvolvimento é o da Homologx.
+Para fazer a troca do ambiente basta chamar o metodo `setEnvironment` ou `setUrl` caso queira passar uma url da plataforma diferente das configuradas:
+
+```javascript
+export enum ENVIRONMENTS {
+  DEV = 'https://platform-homologx.senior.com.br/t/senior.com.br/bridge/1.0',
+  PROD = 'https://api.senior.com.br',
+}
+```
+
 ### Utilização
 
 Para utilizar você só precisa logar através do authentication, atribuir o accessToken para a api recebido do authentication e em seguida você fazer as chamadas para os outros serviços.
@@ -22,6 +33,13 @@ api.authentication.login('my_user', 'my_pass').then((resp) => {
 });
 ```
 
+Mudando o ambiente:
+
+```javascript
+const { ENVIRONMENTS } = require('@seniorsistemas/senior-core');
+api.setEnvironment(ENVIRONMENTS.PROD);
+```
+
 ### Exemplos
 
 No arquivo `examples/index.js` está alguns exemplos utilizando a biblioteca, para rodar eles basta inserir as variáveis de ambiente abaixo:
@@ -34,6 +52,10 @@ PLATFORM_PASS=
 # Id da instancia do processo
 PLATFORM_BPM_PROCESS_INSTANCE_ID=
 ```
+
+#### Exemplos implementados
+
+* [BPM](examples/index.js)
 
 #### Dica
 
