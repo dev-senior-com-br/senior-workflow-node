@@ -11,4 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Configurado CI/CD utilizando Github Actions.
 
-[Unreleased]: https://github.com/dev-senior-com-br/senior-platform-apps-node/commit/HEAD
+## [0.0.1] - 2020-08-16
+
+### Changed
+
+### Fixed
+
+### Removed
+
+### Added
+
+[Unreleased]: https://github.com/dev-senior-com-br/senior-platform-apps-node/compare/v0.0.1...HEAD
+
+[0.0.1]: https://github.com/dev-senior-com-br/senior-platform-apps-node/releases/tag/v0.0.1
