@@ -74,6 +74,6 @@
     "testEnvironment": "node"
   },
   "dependencies": {
-    "@seniorsistemas/senior-core": "^1.2.32-SNAPSHOT-4"
+    "@seniorsistemas/senior-core": "^1.2.33"
   }
 }
