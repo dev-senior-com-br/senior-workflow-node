@@ -65,3 +65,13 @@ PLATFORM_USER=usuario
 PLATFORM_PASS=senha
 PLATFORM_BPM_PROCESS_INSTANCE_ID=id_do_processo
 ```
+
+## [Guia de contribuição](https://dev.senior.com.br/guia-de-contribuicao/)
+
+## Suporte
+
+Criar uma issue [https://github.com/dev-senior-com-br/senior-platform-apps-node/issues](https://github.com/dev-senior-com-br/senior-platform-apps-node/issues)
+
+## License
+
+Copyright © 2020.
