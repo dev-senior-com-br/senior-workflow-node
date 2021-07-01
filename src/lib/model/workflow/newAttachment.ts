@@ -1,3 +1,6 @@
+/**
+ * Objeto de entrada da action newAttachment.
+ */
 export interface NewAttachmentIn {
   /**
   * Nome do arquivo a ser anexado
@@ -9,6 +12,9 @@ export interface NewAttachmentIn {
   size?: number
 }
 
+/**
+ * Objeto de retorno da action newAttachment.
+ */
 export interface NewAttachmentOut {
   /**
   * Anexo
@@ -29,14 +35,14 @@ export interface NewAttachmentOut {
     /**
     * Data do envio (Formato ISO_DATE_TIME: "2016-03-29T12:56:57.155Z")
     */
-    uploadDate: string
+    uploadDate: Date
     /**
     * Responsável pelo anexo
     */
     addedBy : string
   }
   /**
-  * URL para o anexo
+  * URL na qual o upload do arquivo poderá ser realizado
   */
   uploadUrl : string
 }

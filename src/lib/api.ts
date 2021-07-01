@@ -1,11 +1,11 @@
 import { SeniorApi } from '@seniorsistemas/senior-core';
-import BPM from './resources/bpm';
+import Workflow from './resources/workflow';
 
 export class PlatformAppsApi extends SeniorApi {
-  #bpm!: BPM;
+  #workflow!: Workflow;
 
-  get bpm(): BPM {
-    this.#bpm = this.#bpm || new BPM(this);
-    return this.#bpm;
+  get workflow(): Workflow {
+    this.#workflow = this.#workflow || new Workflow(this);
+    return this.#workflow;
   }
 }

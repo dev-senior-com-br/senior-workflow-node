@@ -1,3 +1,12 @@
+import { MyRequestKind } from './myRequestKind';
+import { OrderDirection } from './orderDirection';
+import { OrderField } from './orderField';
+import { PendencyResponseStatus } from './pendencyResponseStatus';
+import { TaskStatus } from './taskStatus';
+
+/**
+ * Objeto de entrada da query searchTasks.
+ */
 export interface SearchTasksIn {
   /**
    * Filtros para pesquisa
@@ -25,11 +34,11 @@ export interface SearchTasksIn {
    */
   pagination?: {
     /**
-     * Faixa inicial da consulta
+     * ìndice inicial da consulta
      */
     start?: number;
     /**
-     * Quantidade de linhas da consulta
+     * Quantidade de itens da consulta
      */
     limit?: number;
   };
@@ -39,17 +48,20 @@ export interface SearchTasksIn {
   orders?: [
     {
       /**
-       * Campo a ser ordenado por REQUESTER, RESPONSIBLE, STATUS, START_DATE, END_DATE, EXPIRATION_DATE e PROCESS_NAME
+       * Campo a ser ordenado
        */
-      field: string;
+      field: OrderField;
       /**
-       * Direção da ordenação ASC ou DESC
+       * Direção da ordenação
        */
-      direction: string;
+      direction: OrderDirection;
     }
   ];
 }
 
+/**
+ * Objeto de retorno da query searchTasks.
+ */
 export interface SearchTasksOut {
   /**
    * Lista de tarefas
@@ -57,7 +69,7 @@ export interface SearchTasksOut {
   tasks: [
     {
       /**
-       * Id do processo
+       * Identificador do processo
        */
       processId: number;
       /**
@@ -65,7 +77,7 @@ export interface SearchTasksOut {
        */
       processName?: string;
       /**
-       * Id da instância do processo
+       * Identificador da instância do processo
        */
       processInstanceId: number;
       /**
@@ -77,43 +89,47 @@ export interface SearchTasksOut {
        */
       detail?: string;
       /**
-       * Data de início da tarefa/processo (Formato ISO_DATE_TIME: '2016-03-29T12:56:57.155Z')
+       * Data de início da tarefa/processo
        */
-      startDate?: string;
+      startDate: Date;
       /**
-       * Data de fim da tarefa/processo (Formato ISO_DATE_TIME: '2016-03-29T12:56:57.155Z')
+       * Data de fim da tarefa/processo
        */
-      endDate?: string;
+      endDate?: Date;
       /**
-       * Data de expiração da tarefa/processo (Formato ISO_DATE_TIME: '2016-03-29T12:56:57.155Z')
+       * Data de expiração da tarefa/processo
        */
-      expirationDate?: string;
+      expirationDate?: Date;
       /**
        * Nome do responsável pela tarefa
        */
       responsableName?: string;
       /**
+       * Nome e sobrenome do responsável pela tarefa
+       */
+      responsableFullName?: string;
+      /**
        * Nome do solicitante
        */
       requesterName: string;
       /**
-       * Status da tarefa UNREADED, READED, PENDING ou TREATED
+       * Status da tarefa
        */
-      taskStatus?: string;
+      taskStatus?: TaskStatus;
       /**
-       * Status da solicitação InProgress, Completed ou Canceled
+       * Status da solicitação
        */
-      requestStatus?: string;
+      requestStatus?: MyRequestKind;
       /**
-       * Título da Solicitação
+       * Título da solicitação
        */
       title?: string;
       /**
-       * Id da atividade
+       * Identificador da atividade
        */
       activityId: number;
       /**
-       * Passo
+       * Identificador da etapa
        */
       step: number;
       /**
@@ -121,9 +137,9 @@ export interface SearchTasksOut {
        */
       pendencyCount: number;
       /**
-       * Estado da pendência em lote WAITING, EXECUTING ou ERROR
+       * Status da pendência
        */
-      responseStatus: string;
+      responseStatus: PendencyResponseStatus;
     }
   ];
   /**
