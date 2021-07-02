@@ -5,17 +5,17 @@ export enum TaskStatus {
   /**
    * Não lida
    */
-  UNREADED,
+  UNREADED = 'UNREADED',
   /**
    * Lida
    */
-  READED,
+  READED = 'READED',
   /**
    * Pendente
    */
-  PENDING,
+  PENDING = 'PENDING',
   /**
    * Tratada
    */
-  TREATED
+  TREATED = 'TREATED'
 }

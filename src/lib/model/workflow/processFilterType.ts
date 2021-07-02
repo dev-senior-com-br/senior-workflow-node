@@ -5,13 +5,13 @@ export enum ProcessFilterType {
   /**
    * Integrado
    */
-  Embedded,
+  Embedded = 'Embedded',
   /**
    * Não Integrado
    */
-  NotEmbedded,
+  NotEmbedded = 'NotEmbedded',
   /**
    * Todos
    */
-  All
+  All = 'All'
 }

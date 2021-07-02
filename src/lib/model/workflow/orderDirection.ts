@@ -5,9 +5,9 @@ export enum OrderDirection {
   /**
    * Ascendente
    */
-  ASC,
+  ASC = 'ASC',
   /**
    * Descendente
    */
-  DESC
+  DESC = 'DESC'
 }

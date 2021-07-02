@@ -5,13 +5,13 @@ export enum MyRequestKind {
   /**
    * Em progresso
    */
-  InProgress,
+  InProgress = 'InProgress',
   /**
    * Completo
    */
-  Completed,
+  Completed = 'Completed',
   /**
    * Cancelado
    */
-  Canceled
+  Canceled = 'Canceled'
 }

@@ -5,17 +5,17 @@ export enum ServiceType {
   /**
    * Processos que o usuário pode abrir solicitação
    */
-  UserGrantedProcesses,
+  UserGrantedProcesses = 'UserGrantedProcesses',
   /**
    * Processos que o usuário pode coordernar
    */
-  UserGrantedCordinateProcesses,
+  UserGrantedCordinateProcesses = 'UserGrantedCordinateProcesses',
   /**
    * Processos que o usuários pode editar
    */
-  AllProcesses,
+  AllProcesses = 'AllProcesses',
   /**
    * Processos que o usuário pode editar ou visualizar
    */
-  UserGrantedOrEditProcesses
+  UserGrantedOrEditProcesses = 'UserGrantedOrEditProcesses'
 }

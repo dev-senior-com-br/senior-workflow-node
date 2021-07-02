@@ -5,13 +5,13 @@ export enum PendencyResponseStatus {
   /**
    * Aguardando
    */
-  WAITING,
+  WAITING = 'WAITING',
   /**
    * Executando
    */
-  EXECUTING,
+  EXECUTING = 'EXECUTING',
   /**
    * Erro
    */
-  ERROR
+  ERROR = 'ERROR'
 }

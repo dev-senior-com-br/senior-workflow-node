@@ -5,9 +5,9 @@ export enum ProcessPublicationStatus {
   /**
    * Salvo
    */
-  Saved,
+  Saved = 'Saved',
   /**
    * Publicado
    */
-  Published
+  Published = 'Published'
 }

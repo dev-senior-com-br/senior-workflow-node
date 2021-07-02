@@ -5,13 +5,13 @@ export enum ReportTaskExpirationStatus {
   /**
    * Em progresso
    */
-  InProgress,
+  InProgress = 'InProgress',
   /**
    * Irá expirar
    */
-  WillExpire,
+  WillExpire = 'WillExpire',
   /**
    * Expirado
    */
-  Expired
+  Expired = 'Expired'
 }

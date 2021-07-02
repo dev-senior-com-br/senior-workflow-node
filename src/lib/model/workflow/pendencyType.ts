@@ -1,5 +1,5 @@
 export enum PendencyType {
-  Pending,
-  Treated,
-  All
+  Pending = 'Pending',
+  Treated = 'Treated',
+  All = 'All'
 }

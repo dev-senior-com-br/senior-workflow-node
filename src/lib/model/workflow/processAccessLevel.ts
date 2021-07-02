@@ -5,17 +5,17 @@ export enum ProcessAccessLevel {
   /**
    * Editar e iniciar
    */
-  EDIT_AND_START,
+  EDIT_AND_START = 'EDIT_AND_START',
   /**
    * Iniciar
    */
-  START,
+  START = 'START',
   /**
    * Editar
    */
-  EDIT,
+  EDIT = 'EDIT',
   /**
    * Nenhuma
    */
-  NONE
+  NONE = 'NONE'
 }
