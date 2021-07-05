@@ -273,10 +273,10 @@ export default class Workflow extends RequestClient {
    * Cria um ClientOptions padrão com o 'method' POST e com o accessToken no header authorization.
    * @param primitiveUrl Url da primitiva no padrão 'queries/{nome_primitiva}'
    * ou 'actions/{nome_primitiva}'.
-   * @param payload Objeto enviado no body da requisição
+   * @param payload Objeto enviado no body da requisição.
    * @returns ClientOptions com as informações necessárias para realizar as requisições.
    */
-  private buildClientOptions(primitiveUrl: string, payload: any): ClientOptions {
+  private buildClientOptions<T>(primitiveUrl: string, payload: T): ClientOptions {
     return {
       url: this.getUrlPath(primitiveUrl),
       method: HttpMethod.POST,
