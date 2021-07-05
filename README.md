@@ -9,14 +9,14 @@ Alguns serviços como o HCM e SAM possuem suas próprias bibliotecas, que podem 
 
 ## Instalação
 
-Adicione a dependência da bibliote em seu projeto através do comando:
+Adicione a dependência da biblioteca em seu projeto através do comando:
 ```bash
 npm install --save @seniorsistemas/senior-platform-apps
 ```
 
 ## Ambiente
-Atualmente o ambiente padrão para o desenvolvimento é o da Homologx.
-Para fazer a troca do ambiente basta chamar o método `setEnvironment` ou `setUrl` caso queira passar uma url da plataforma diferente das configuradas:
+Atualmente o ambiente padrão para o desenvolvimento é o de homologação (Homologx).
+Para fazer a troca do ambiente basta chamar o método `setEnvironment` ou `setUrl` caso queira passar uma url da plataforma diferente das configuradas. Os ambientes principais estão definidos no enum `ENVIRONMENTS` apresentado abaixo:
 
 ```javascript
 export enum ENVIRONMENTS {
@@ -27,7 +27,7 @@ export enum ENVIRONMENTS {
 
 ## Utilização
 
-Para utilizar você só precisa logar através da API `authentication` e atribuir para a API o `accessToken` recebido do `authentication`. Em seguida você poderá fazer as chamadas para os outros serviços. O exemplo abaixo demonstra o processo de login e criação de uma solicitação de viagem no BPM através do método `startRequest`:
+Para utilizar a biblioteca você precisa apenas se autenticar através da API `authentication` e atribuir para a API o `accessToken` recebido após o processo. Em seguida você poderá utilizar todos os outros serviços disponíveis. O exemplo abaixo demonstra o processo de login e criação de uma solicitação de viagem no BPM através do método `startRequest`:
 
 ```javascript
 const { PlatformAppsApi } = require('@seniorsistemas/senior-platform-apps');
