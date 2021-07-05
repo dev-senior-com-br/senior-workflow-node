@@ -8,8 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Adicionado projeto com `@seniorsistemas/senior-platform-apps`
+- Adicionado resource `workflow.ts` e todos os models necessários para realizar as chamadas ao serviço de Workflow (BPM)
+- Adicionado arquivo `workflow-examples.ts` com exemplos de uso do client do Workflow
 
--   Configurado CI/CD utilizando Github Actions.
+### Changed
+- Alterado README ajustando informações sobre instalação e uso do SDK
 
 ## [0.0.1] - 2020-08-16
 
