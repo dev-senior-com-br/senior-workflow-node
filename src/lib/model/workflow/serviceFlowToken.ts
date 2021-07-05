@@ -1,5 +1,6 @@
 /**
- * Token do processo.
+ * Representa a chave de uma pendência de um processo. - Deprecado
+ * @see FlowToken
  */
 export interface ServiceFlowToken { 
   /**

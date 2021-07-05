@@ -6,15 +6,15 @@ import { ServiceSubject } from './serviceSubject';
  */
 export interface GetNextSubjectFromInitialTaskIn {
   /**
-   * Identificador do Processo
+   * Identificador do processo
    */
   processId: number;
   /**
-   * Versão do Processo
+   * Versão do processo
    */
   processVersion: number;
   /**
-   * Nome da Sequência do Processo Modelador
+   * Nome da sequência do Processo Modelador
    */
   sequenceName: string;
   /**

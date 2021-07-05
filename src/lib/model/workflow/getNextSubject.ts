@@ -10,7 +10,7 @@ export interface GetNextSubjectIn {
    */
   serviceFlowToken: ServiceFlowToken;
   /**
-   * Nome da Sequência do Processo Modelador
+   * Nome da sequência do Processo Modelador
    */
   sequenceName: string;
   /**

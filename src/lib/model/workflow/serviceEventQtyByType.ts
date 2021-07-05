@@ -1,7 +1,7 @@
 import { IntegrationStatus } from './integrationStatus';
 
 /**
- * Quantidade de eventos de serviços externos por tipos
+ * Quantidade de eventos de serviços externos por tipos.
  */
 export interface ServiceEventQtyByType { 
     /**

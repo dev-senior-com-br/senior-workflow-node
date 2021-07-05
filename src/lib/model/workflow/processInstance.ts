@@ -3,7 +3,7 @@ import { ServiceProcess } from './serviceProcess';
 import { ServiceSubject } from './serviceSubject';
 
 /**
- * Representa uma instância de processo
+ * Representa uma instância de processo.
  */
 export interface ProcessInstance { 
   /**

@@ -29,7 +29,7 @@ export interface RequestHistoryTimelineEntry {
    */
   taskName?: string;
   /**
-   * Nome ação executada
+   * Nome da ação executada
    */
   actionName?: string;
   /**

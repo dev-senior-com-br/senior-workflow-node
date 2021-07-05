@@ -6,7 +6,7 @@ import { ServiceSubject } from './serviceSubject';
  */
 export interface ChangePendencyUserIn {
   /**
-   * Lista dos identificadores da tarefas
+   * Lista dos identificadores das tarefas
    */
   serviceFlowTokens: Array<ServiceFlowToken>;
   /**

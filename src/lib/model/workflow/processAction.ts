@@ -1,5 +1,5 @@
 /**
- * Representação de uma ação de um processo ou etapa do processo
+ * Representação de uma ação de um processo ou etapa do processo.
  */
 export interface ProcessAction { 
   name: string;

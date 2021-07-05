@@ -2,27 +2,14 @@ import * as models from '../model/workflow/index';
 import { SeniorApi, RequestClient } from '@seniorsistemas/senior-core';
 import { RequestReturn } from '@seniorsistemas/senior-core/dist/lib/model/RequestReturn';
 import { HttpMethod } from '@seniorsistemas/senior-core/dist/lib/model/HttpMethod';
+import { ClientOptions } from '@seniorsistemas/senior-core/dist/lib/model/ClientOptions';
 
+/**
+ * Service responsável pela comunicação com o serviço de Workflow.
+ */
 export default class Workflow extends RequestClient {
   constructor(seniorApi: SeniorApi) {
     super(seniorApi, 'platform', 'workflow');
-  }
-
-  /**
-   * Responde uma pendência.
-   * @param responsePendencyIn Informações necessárias para responder a pendência.
-   * @returns Promise contendo o retorno da requisição vazia ou um objeto de erro em caso de falha.
-   */
-  responsePendency(responsePendencyIn: models.ResponsePendencyIn): Promise<RequestReturn<void>> {
-    const clientOptions = {
-      url: this.getUrlPath('actions/responsePendency'),
-      method: HttpMethod.POST,
-      data: responsePendencyIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
-    return this.request(clientOptions);
   }
 
   /**
@@ -32,14 +19,7 @@ export default class Workflow extends RequestClient {
    * processo criada ou um objeto de erro em caso de falha.
    */
   startRequest(startRequestIn: models.StartRequestIn): Promise<RequestReturn<models.StartRequestOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('actions/startRequest'),
-      method: HttpMethod.POST,
-      data: startRequestIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('actions/startRequest', startRequestIn);
     return this.request(clientOptions);
   }
 
@@ -50,14 +30,7 @@ export default class Workflow extends RequestClient {
    * processo criada ou um objeto de erro em caso de falha.
    */
   startProcess(startProcessIn: models.StartProcessIn): Promise<RequestReturn<models.StartProcessOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('actions/startProcess'),
-      method: HttpMethod.POST,
-      data: startProcessIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('actions/startProcess', startProcessIn);
     return this.request(clientOptions);
   }
 
@@ -68,14 +41,7 @@ export default class Workflow extends RequestClient {
    * ou um objeto de erro em caso de falha.
    */
   newAttachment(newAttachmentIn: models.NewAttachmentIn): Promise<RequestReturn<models.NewAttachmentOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('actions/newAttachment'),
-      method: HttpMethod.POST,
-      data: newAttachmentIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('actions/newAttachment', newAttachmentIn);
     return this.request(clientOptions);
   }
 
@@ -85,14 +51,7 @@ export default class Workflow extends RequestClient {
    * @returns Promise contendo o retorno da requisição vazia ou um objeto de erro em caso de falha.
    */
   commitAttachment(commitAttachmentIn: models.CommitAttachmentIn): Promise<RequestReturn<void>> {
-    const clientOptions = {
-      url: this.getUrlPath('actions/commitAttachment'),
-      method: HttpMethod.POST,
-      data: commitAttachmentIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('actions/commitAttachment', commitAttachmentIn);
     return this.request(clientOptions);
   }
 
@@ -102,50 +61,7 @@ export default class Workflow extends RequestClient {
    * @returns Promise contendo o retorno da requisição vazia ou um objeto de erro em caso de falha.
    */
   linkAttachments(linkAttachmentsIn: models.LinkAttachmentsIn): Promise<RequestReturn<void>> {
-    const clientOptions = {
-      url: this.getUrlPath('actions/linkAttachments'),
-      method: HttpMethod.POST,
-      data: linkAttachmentsIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
-    return this.request(clientOptions);
-  }
-
-  /**
-   * Lista as tarefas que atendam aos filtros informados.
-   * @param searchTasksIn Informações para controlar a pesquisa de tarefas.
-   * @returns Promise contendo o retorno da requisição com a lista de tarefas recuperadas
-   * ou um objeto de erro em caso de falha.
-   */
-  searchTasks(searchTasksIn: models.SearchTasksIn = {}): Promise<RequestReturn<models.SearchTasksOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/searchTasks'),
-      method: HttpMethod.POST,
-      data: searchTasksIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
-    return this.request(clientOptions);
-  }
-
-  /**
-   * Busca um processo do Workflow.
-   * @param findProcessIn Informações do processo a ser recuperado.
-   * @returns Promise contendo o retorno da requisição com o processo recuperado
-   * ou um objeto de erro em caso de falha.
-   */
-  findProcess(findProcessIn: models.FindProcessIn): Promise<RequestReturn<models.FindProcessOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/findProcess'),
-      method: HttpMethod.POST,
-      data: findProcessIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('actions/linkAttachments', linkAttachmentsIn);
     return this.request(clientOptions);
   }
 
@@ -156,14 +72,7 @@ export default class Workflow extends RequestClient {
    * ou um objeto de erro em caso de falha.
    */
   getProcessesList(getProcessesListIn: models.GetProcessesListIn): Promise<RequestReturn<models.GetProcessesListOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getProcessesList'),
-      method: HttpMethod.POST,
-      data: getProcessesListIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('queries/getProcessesList', getProcessesListIn);
     return this.request(clientOptions);
   }
 
@@ -177,14 +86,18 @@ export default class Workflow extends RequestClient {
   getRankingProcesses(
     getRankingProcessesIn: models.GetRankingProcessesIn = {}
   ): Promise<RequestReturn<models.GetRankingProcessesOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getRankingProcesses'),
-      method: HttpMethod.POST,
-      data: getRankingProcessesIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('queries/getRankingProcesses', getRankingProcessesIn);
+    return this.request(clientOptions);
+  }
+
+  /**
+   * Busca um processo do Workflow.
+   * @param findProcessIn Informações do processo a ser recuperado.
+   * @returns Promise contendo o retorno da requisição com o processo recuperado
+   * ou um objeto de erro em caso de falha.
+   */
+  findProcess(findProcessIn: models.FindProcessIn): Promise<RequestReturn<models.FindProcessOut>> {
+    const clientOptions = this.buildClientOptions('queries/findProcess', findProcessIn);
     return this.request(clientOptions);
   }
 
@@ -197,31 +110,7 @@ export default class Workflow extends RequestClient {
   getProcessInstance(
     getProcessInstanceIn: models.GetProcessInstanceIn
   ): Promise<RequestReturn<models.GetProcessInstanceOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getProcessInstance'),
-      method: HttpMethod.POST,
-      data: getProcessInstanceIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
-    return this.request(clientOptions);
-  }
-
-  /**
-   * Cancela uma lista de processos que estejam em andamento.
-   * @param cancelProcessInstanceIn Informação das instâncias de processos a serem canceladas.
-   * @returns Promise contendo o retorno da requisição vazia ou um objeto de erro em caso de falha.
-   */
-  cancelProcessInstance(cancelProcessInstanceIn: models.CancelProcessInstanceIn): Promise<RequestReturn<void>> {
-    const clientOptions = {
-      url: this.getUrlPath('actions/cancelProcessInstance'),
-      method: HttpMethod.POST,
-      data: cancelProcessInstanceIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('queries/getProcessInstance', getProcessInstanceIn);
     return this.request(clientOptions);
   }
 
@@ -234,14 +123,7 @@ export default class Workflow extends RequestClient {
   getRequestsResume(
     getRequestsResumeIn: models.GetRequestsResumeIn
   ): Promise<RequestReturn<models.GetRequestsResumeOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getRequestsResume'),
-      method: HttpMethod.POST,
-      data: getRequestsResumeIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('queries/getRequestsResume', getRequestsResumeIn);
     return this.request(clientOptions);
   }
 
@@ -254,14 +136,7 @@ export default class Workflow extends RequestClient {
   getRequestHistoryTimeline(
     getRequestHistoryTimelineIn: models.GetRequestHistoryTimelineIn
   ): Promise<RequestReturn<models.GetRequestHistoryTimelineOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getRequestHistoryTimeline'),
-      method: HttpMethod.POST,
-      data: getRequestHistoryTimelineIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('queries/getRequestHistoryTimeline', getRequestHistoryTimelineIn);
     return this.request(clientOptions);
   }
 
@@ -274,14 +149,10 @@ export default class Workflow extends RequestClient {
   getThirdPartyRequestByStatus(
     getThirdPartyRequestByStatusIn: models.GetThirdPartyRequestByStatusIn
   ): Promise<RequestReturn<models.GetThirdPartyRequestByStatusOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getThirdPartyRequestByStatus'),
-      method: HttpMethod.POST,
-      data: getThirdPartyRequestByStatusIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions(
+      'queries/getThirdPartyRequestByStatus',
+      getThirdPartyRequestByStatusIn
+    );
     return this.request(clientOptions);
   }
 
@@ -292,14 +163,7 @@ export default class Workflow extends RequestClient {
    * ou um objeto de erro em caso de falha.
    */
   getSubjects(getSubjectsIn: models.GetSubjectsIn): Promise<RequestReturn<models.GetSubjectsOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getSubjects'),
-      method: HttpMethod.POST,
-      data: getSubjectsIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('queries/getSubjects', getSubjectsIn);
     return this.request(clientOptions);
   }
 
@@ -310,14 +174,7 @@ export default class Workflow extends RequestClient {
    * próxima tarefa ou um objeto de erro em caso de falha.
    */
   getNextSubject(getNextSubjectIn: models.GetNextSubjectIn): Promise<RequestReturn<models.GetNextSubjectOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getNextSubject'),
-      method: HttpMethod.POST,
-      data: getNextSubjectIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('queries/getNextSubject', getNextSubjectIn);
     return this.request(clientOptions);
   }
 
@@ -330,48 +187,32 @@ export default class Workflow extends RequestClient {
   getNextSubjectFromInitialTask(
     getNextSubjectFromInitialTaskIn: models.GetNextSubjectFromInitialTaskIn
   ): Promise<RequestReturn<models.GetNextSubjectFromInitialTaskOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getNextSubjectFromInitialTask'),
-      method: HttpMethod.POST,
-      data: getNextSubjectFromInitialTaskIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions(
+      'queries/getNextSubjectFromInitialTask',
+      getNextSubjectFromInitialTaskIn
+    );
     return this.request(clientOptions);
   }
 
   /**
-   * Responde pendências em lote executando uma das ações disponíveis.
-   * @param batchPendenciesResponseIn Informações necessárias para responder a lista de pendências.
-   * @returns Promise contendo o retorno da requisição vazia ou um objeto de erro em caso de falha.
+   * Lista as tarefas que atendam aos filtros informados.
+   * @param searchTasksIn Informações para controlar a pesquisa de tarefas.
+   * @returns Promise contendo o retorno da requisição com a lista de tarefas recuperadas
+   * ou um objeto de erro em caso de falha.
    */
-  batchPendenciesResponse(batchPendenciesResponseIn: models.BatchPendenciesResponseIn): Promise<RequestReturn<void>> {
-    const clientOptions = {
-      url: this.getUrlPath('actions/batchPendenciesResponse'),
-      method: HttpMethod.POST,
-      data: batchPendenciesResponseIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+  searchTasks(searchTasksIn: models.SearchTasksIn = {}): Promise<RequestReturn<models.SearchTasksOut>> {
+    const clientOptions = this.buildClientOptions('queries/searchTasks', searchTasksIn);
     return this.request(clientOptions);
   }
 
   /**
-   * Atribui uma pendência para outro usuário.
-   * @param changePendencyUserIn Informações para realizar a troca do usuário da pendência.
-   * @returns Promise contendo o retorno da requisição vazia ou um objeto de erro em caso de falha.
+   * Obtém as pendências do usuário autenticado conforme o tipo.
+   * @param getMyPendenciesIn Informações necessárias para recuperar as pendências.
+   * @returns Promise contendo o retorno da requisição com a lista de pendências recuperadas
+   * ou um objeto de erro em caso de falha.
    */
-  changePendencyUser(changePendencyUserIn: models.ChangePendencyUserIn): Promise<RequestReturn<void>> {
-    const clientOptions = {
-      url: this.getUrlPath('actions/changePendencyUser'),
-      method: HttpMethod.POST,
-      data: changePendencyUserIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+  getMyPendencies(getMyPendenciesIn: models.GetMyPendenciesIn): Promise<RequestReturn<models.GetMyPendenciesOut>> {
+    const clientOptions = this.buildClientOptions('queries/getMyPendencies', getMyPendenciesIn);
     return this.request(clientOptions);
   }
 
@@ -384,32 +225,65 @@ export default class Workflow extends RequestClient {
   getPendencyProcessActions(
     getPendencyProcessActionsIn: models.GetPendencyProcessActionsIn
   ): Promise<RequestReturn<models.GetPendencyProcessActionsOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getPendencyProcessActions'),
-      method: HttpMethod.POST,
-      data: getPendencyProcessActionsIn,
-      headers: {
-        authorization: this.seniorApi.accessToken,
-      },
-    };
+    const clientOptions = this.buildClientOptions('queries/getPendencyProcessActions', getPendencyProcessActionsIn);
     return this.request(clientOptions);
   }
 
   /**
-   * Obtém as pendências do usuário autenticado conforme o tipo.
-   * @param getMyPendenciesIn Informações necessárias para recuperar as pendências.
-   * @returns Promise contendo o retorno da requisição com a lista de pendências recuperadas
-   * ou um objeto de erro em caso de falha.
+   * Atribui uma pendência para outro usuário.
+   * @param changePendencyUserIn Informações para realizar a troca do usuário da pendência.
+   * @returns Promise contendo o retorno da requisição vazia ou um objeto de erro em caso de falha.
    */
-  getMyPendencies(getMyPendenciesIn: models.GetMyPendenciesIn): Promise<RequestReturn<models.GetMyPendenciesOut>> {
-    const clientOptions = {
-      url: this.getUrlPath('queries/getMyPendencies'),
+  changePendencyUser(changePendencyUserIn: models.ChangePendencyUserIn): Promise<RequestReturn<void>> {
+    const clientOptions = this.buildClientOptions('actions/changePendencyUser', changePendencyUserIn);
+    return this.request(clientOptions);
+  }
+
+  /**
+   * Responde uma pendência.
+   * @param responsePendencyIn Informações necessárias para responder a pendência.
+   * @returns Promise contendo o retorno da requisição vazia ou um objeto de erro em caso de falha.
+   */
+  responsePendency(responsePendencyIn: models.ResponsePendencyIn): Promise<RequestReturn<void>> {
+    const clientOptions = this.buildClientOptions('actions/responsePendency', responsePendencyIn);
+    return this.request(clientOptions);
+  }
+
+  /**
+   * Responde pendências em lote executando uma das ações disponíveis.
+   * @param batchPendenciesResponseIn Informações necessárias para responder a lista de pendências.
+   * @returns Promise contendo o retorno da requisição vazia ou um objeto de erro em caso de falha.
+   */
+  batchPendenciesResponse(batchPendenciesResponseIn: models.BatchPendenciesResponseIn): Promise<RequestReturn<void>> {
+    const clientOptions = this.buildClientOptions('actions/batchPendenciesResponse', batchPendenciesResponseIn);
+    return this.request(clientOptions);
+  }
+
+  /**
+   * Cancela uma lista de processos que estejam em andamento.
+   * @param cancelProcessInstanceIn Informação das instâncias de processos a serem canceladas.
+   * @returns Promise contendo o retorno da requisição vazia ou um objeto de erro em caso de falha.
+   */
+  cancelProcessInstance(cancelProcessInstanceIn: models.CancelProcessInstanceIn): Promise<RequestReturn<void>> {
+    const clientOptions = this.buildClientOptions('actions/cancelProcessInstance', cancelProcessInstanceIn);
+    return this.request(clientOptions);
+  }
+
+  /**
+   * Cria um ClientOptions padrão com o 'method' POST e com o accessToken no header authorization.
+   * @param primitiveUrl Url da primitiva no padrão 'queries/{nome_primitiva}'
+   * ou 'actions/{nome_primitiva}'.
+   * @param payload Objeto enviado no body da requisição
+   * @returns ClientOptions com as informações necessárias para realizar as requisições.
+   */
+  private buildClientOptions(primitiveUrl: string, payload: any): ClientOptions {
+    return {
+      url: this.getUrlPath(primitiveUrl),
       method: HttpMethod.POST,
-      data: getMyPendenciesIn,
+      data: payload,
       headers: {
         authorization: this.seniorApi.accessToken,
       },
     };
-    return this.request(clientOptions);
   }
 }

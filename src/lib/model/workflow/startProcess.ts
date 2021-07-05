@@ -22,11 +22,11 @@ export interface StartProcessIn {
    */
   processVersion?: number;
   /**
-   * Json com variáveis de Negócio do Processo. Ex: { "businessData": { "campo1": "valor1", "campo2": 2 }}
+   * Json com variáveis de negócio do processo. Ex: { "businessData": { "campo1": "valor1", "campo2": 2 }}
    */
   businessData: string;
   /**
-   * Informação para Fluxo de Execução do Processo
+   * Informação para Fluxo de Execução do processo
    */
   flowExecutionData: FlowExecutionData;
   /**
@@ -42,8 +42,8 @@ export interface StartProcessIn {
    */
   requester?: string;
   /**
-   * Se existir um serviço externo antes da primeira etapa, o mesmo deve sobrescrever 
-   * as variáveis enviadas no businessData
+   * Se existir um serviço externo antes da primeira etapa, o mesmo deve 
+   * sobrescrever as variáveis enviadas no businessData
    */
   externalServiceOverrideBusinessData?: boolean;
 }
@@ -53,7 +53,7 @@ export interface StartProcessIn {
  */
 export interface StartProcessOut {
   /**
-   * Instância de processo criada
+   * Identificador da instância de processo criada
    */
   processInstanceID: number;
 }

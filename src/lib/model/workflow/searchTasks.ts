@@ -34,7 +34,7 @@ export interface SearchTasksIn {
    */
   pagination?: {
     /**
-     * ìndice inicial da consulta
+     * Índice inicial da consulta
      */
     start?: number;
     /**

@@ -1,5 +1,5 @@
 /**
- * Representação corrigindo o processInstanceID presente no ServiceFlowToken
+ * Representação corrigindo o processInstanceID presente no ServiceFlowToken.
  */
 export interface FlowToken { 
   /**

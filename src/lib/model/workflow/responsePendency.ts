@@ -14,11 +14,11 @@ export interface ResponsePendencyIn {
    */
   responseData?: {
     /**
-     * Dados de Negócio do Processo. Ex: { "businessData": { "campo1": "valor1", "campo2": 2 }}
+     * Dados de negócio do processo. Ex: { "businessData": { "campo1": "valor1", "campo2": 2 }}
      */
     businessData?: string;
     /**
-     * Informação para Fluxo de Execução do Processo
+     * Informação para Fluxo de Execução do processo
      */
     flowExecutionData?: FlowExecutionData;
   };

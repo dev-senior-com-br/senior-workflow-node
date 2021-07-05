@@ -7,7 +7,7 @@ export interface StartRequestIn {
    */
   processId: number;
   /**
-   * Objeto com as variáveis de Negócio do Processo. Ex: businessData: { campo1: "valor1", campo2: 2 }
+   * Objeto com as variáveis de negócio do processo. Ex: businessData: { campo1: "valor1", campo2: 2 }
    */
   businessData: Record<string, unknown>;
   /**
@@ -38,7 +38,7 @@ export interface StartRequestIn {
  */
 export interface StartRequestOut {
   /**
-  * Instância de processo criada
+  * Identificador da instância de processo criada
   */ 	
   processInstanceID: number;
 } 

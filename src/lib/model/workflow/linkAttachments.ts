@@ -7,7 +7,7 @@ export interface LinkAttachmentsIn {
   */
   ids: string[]
   /**
-  * Identificador da instância de processo ao qual o arquivo pertence.
+  * Identificador da instância de processo ao qual o arquivo pertence
   */
   processInstance: number
 }

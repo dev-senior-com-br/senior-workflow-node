@@ -4,7 +4,7 @@ import { ServiceFlowToken } from './serviceFlowToken';
 import { ServiceSubject } from './serviceSubject';
 
 /**
- * Representa uma pendência de um processo
+ * Representa uma pendência de um processo.
  */
 export interface Pendency { 
     serviceFlowToken: ServiceFlowToken;
