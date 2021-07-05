@@ -13,14 +13,15 @@ const { SubjectKind } = require('../dist/lib/model/workflow/subjectKind');
  * de Solicitação de Viagens.
  */
 
-const user = process.env.PLATFORM_USER;
-const pass = process.env.PLATFORM_PASS;
+const username = process.env.PLATFORM_USER;
+const password = process.env.PLATFORM_PASS;
+// identificador de um processo previamente criado e publicado no Workflow
 const processId = process.env.PLATFORM_BPM_PROCESS_ID;
 
 const api = new PlatformAppsApi();
 
 api.authentication
-  .login(user, pass)
+  .login(username, password)
   .then(async resp => {
     console.log('login...\n', resp.body);
 
