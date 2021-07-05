@@ -30,6 +30,9 @@ api.authentication
     // também é possível utilizar o startProcess() para a mesma finalidade
     const processInstanceId = startRequest();
 
+    // realiza todas as operações necessárias para adicionar um anexo em uma solicitação
+    addAttachmentToProcessInstance(processInstanceId);
+
     // recupera lista de todos os processos
     getProcessesList();
 
@@ -55,7 +58,7 @@ api.authentication
     getSubjects();
 
     // recupera todos os possíveis responsáveis para a próxima tarefa
-    getNextSubject(processInstanceId);
+    getNextSubject(8);
     getNextSubjectFromInitialTask();
 
     // recupera lista de tarefas filtradas pelo 'processId' e ordenadas pela data de expiração
@@ -69,9 +72,6 @@ api.authentication
 
     // altera o usuário responsável pela solicitação
     changePendencyUser(processInstanceId);
-
-    // realiza todas as operações necessárias para adicionar um anexo em uma solicitação
-    addAttachmentToProcessInstance();
 
     // responde uma pendência ou uma lista de pendências
     responsePendency(processInstanceId);
@@ -95,7 +95,7 @@ function startRequest() {
         motivo: 'Visita a cliente',
       },
       title: 'Viagem para Curitiba',
-      actionToExecute: 'Analisar'
+      actionToExecute: 'Analisar',
     })
     .then(resp => console.log('startRequest...', resp.body))
     .catch(err => console.error(err.response.data));
@@ -187,24 +187,24 @@ function getThirdPartyRequestByStatus() {
 function getSubjects() {
   api.workflow
     .getSubjects({
-      type: SubjectKind.User
+      type: SubjectKind.User,
     })
     .then(resp => console.log('getSubjects...\n', resp.body))
-    .catch(err => console.error(err.response.data));
+    .catch(err => console.error('getSubjects...\n', err.response.data));
 }
 
 function getNextSubject(processInstanceId) {
   api.workflow
     .getNextSubject({
       serviceFlowToken: {
-        activityId: 10,
+        activityId: 1,
         processInstanceID: processInstanceId,
-        step: 30,
+        step: 1,
       },
-      sequenceName: 'sequence',
+      sequenceName: 'Prosseguir',
     })
     .then(resp => console.log('getNextSubject...\n', resp.body))
-    .catch(err => console.error(err.response.data));
+    .catch(err => console.error('getNextSubject...\n', err.response.data));
 }
 
 function getNextSubjectFromInitialTask() {
@@ -212,10 +212,10 @@ function getNextSubjectFromInitialTask() {
     .getNextSubjectFromInitialTask({
       processId: processId,
       processVersion: 10,
-      sequenceName: 'sequence',
+      sequenceName: 'Prosseguir',
     })
     .then(resp => console.log('getNextSubjectFromInitialTask...\n', resp.body))
-    .catch(err => console.error(err.response.data));
+    .catch(err => console.error('getNextSubjectFromInitialTask...\n', err.response.data));
 }
 
 function searchTasks() {
@@ -275,7 +275,7 @@ function changePendencyUser(processInstanceId) {
  * Realiza as operações newAttachment, commitAttachment e linkAttachments, que
  * resulta na criação e relação de um anexo com uma solicitação.
  */
-function addAttachmentToProcessInstance() {
+function addAttachmentToProcessInstance(processInstanceId) {
   api.workflow
     .newAttachment({ name: 'file2.txt' })
     .then(async resp => {
@@ -292,7 +292,7 @@ function addAttachmentToProcessInstance() {
           api.workflow
             .linkAttachments({
               ids: [attachmentId],
-              processInstance: processId,
+              processInstance: processInstanceId,
             })
             .then(resp => console.log('linkAttachments...', resp.body))
             .catch(err => console.error(err.response.data));
