@@ -1,8 +1,5 @@
-import * as models from '../model/workflow/index';
-import { SeniorApi, RequestClient } from '@seniorsistemas/senior-core';
-import { RequestReturn } from '@seniorsistemas/senior-core/dist/lib/model/RequestReturn';
-import { HttpMethod } from '@seniorsistemas/senior-core/dist/lib/model/HttpMethod';
-import { ClientOptions } from '@seniorsistemas/senior-core/dist/lib/model/ClientOptions';
+import * as models from '../model/workflow';
+import { SeniorApi, RequestClient, RequestReturn, HttpMethod } from '@seniorsistemas/senior-core';
 
 /**
  * Service responsável pela comunicação com o serviço de Workflow.
@@ -276,7 +273,7 @@ export default class Workflow extends RequestClient {
    * @param payload Objeto enviado no body da requisição.
    * @returns ClientOptions com as informações necessárias para realizar as requisições.
    */
-  private buildClientOptions<T>(primitiveUrl: string, payload: T): ClientOptions<T> {
+  private buildClientOptions<T>(primitiveUrl: string, payload: T): any {
     return {
       url: this.getUrlPath(primitiveUrl),
       method: HttpMethod.POST,

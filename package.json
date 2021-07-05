@@ -1,14 +1,14 @@
 {
   "name": "@seniorsistemas/senior-platform-apps",
   "version": "0.0.1",
-  "description": "Lib para utilização da api de aplicativos da plataforma da Senior Sistemas.",
+  "description": "Biblioteca para utilização das APIs de aplicativos da plataforma da Senior Sistemas.",
   "main": "./dist/index.js",
   "scripts": {
     "prepublishOnly": "npm run build",
     "prebuild": "del-cli --force ./dist",
     "build": "tsc",
     "format": "prettier --write \"lib/**/*.ts\" \"lib/**/*.js\"",
-    "lint": "eslint src",
+    "lint": "eslint",
     "lint:fix": "npm run lint -- --fix",
     "test": "npm run lint"
   },

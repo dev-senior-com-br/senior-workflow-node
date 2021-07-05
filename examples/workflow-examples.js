@@ -1,12 +1,14 @@
 require('dotenv').config();
-const { PlatformAppsApi } = require('../dist');
+const {
+  OrderDirection,
+  OrderField,
+  PendencyType,
+  PlatformAppsApi,
+  ProcessFilterType,
+  ServiceType,
+  SubjectKind,
+} = require('../dist');
 const { put } = require('axios');
-const { OrderField } = require('../dist/lib/model/workflow/orderField');
-const { OrderDirection } = require('../dist/lib/model/workflow/orderDirection');
-const { ServiceType } = require('../dist/lib/model/workflow/serviceType');
-const { ProcessFilterType } = require('../dist/lib/model/workflow/processFilterType');
-const { PendencyType } = require('../dist/lib/model/workflow/pendencyType');
-const { SubjectKind } = require('../dist/lib/model/workflow/subjectKind');
 
 /**
  * Este exemplo utiliza como base um processo previamente modelado e publicado no Workflow
