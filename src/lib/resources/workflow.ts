@@ -121,7 +121,7 @@ export default class Workflow extends RequestClient {
    * ou um objeto de erro em caso de falha.
    */
   getRequestsResume(
-    getRequestsResumeIn: models.GetRequestsResumeIn
+    getRequestsResumeIn: models.GetRequestsResumeIn = {}
   ): Promise<RequestReturn<models.GetRequestsResumeOut>> {
     const clientOptions = this.buildClientOptions('queries/getRequestsResume', getRequestsResumeIn);
     return this.request(clientOptions);
@@ -211,7 +211,7 @@ export default class Workflow extends RequestClient {
    * @returns Promise contendo o retorno da requisição com a lista de pendências recuperadas
    * ou um objeto de erro em caso de falha.
    */
-  getMyPendencies(getMyPendenciesIn: models.GetMyPendenciesIn): Promise<RequestReturn<models.GetMyPendenciesOut>> {
+  getMyPendencies(getMyPendenciesIn: models.GetMyPendenciesIn = {}): Promise<RequestReturn<models.GetMyPendenciesOut>> {
     const clientOptions = this.buildClientOptions('queries/getMyPendencies', getMyPendenciesIn);
     return this.request(clientOptions);
   }

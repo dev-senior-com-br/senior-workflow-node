@@ -15,14 +15,14 @@ const { SubjectKind } = require('../dist/lib/model/workflow/subjectKind');
 
 const user = process.env.PLATFORM_USER;
 const pass = process.env.PLATFORM_PASS;
-const processId = process.env.PLATFORM_BPM_PROCESS_INSTANCE_ID;
+const processId = process.env.PLATFORM_BPM_PROCESS_ID;
 
 const api = new PlatformAppsApi();
 
 api.authentication
   .login(user, pass)
   .then(async resp => {
-    console.log('Login...\n', resp.body);
+    console.log('login...\n', resp.body);
 
     api.accessToken = JSON.parse(resp.body.jsonToken).access_token;
 
@@ -58,7 +58,7 @@ api.authentication
     getSubjects();
 
     // recupera todos os possíveis responsáveis para a próxima tarefa
-    getNextSubject(8);
+    getNextSubject(processInstanceId);
     getNextSubjectFromInitialTask();
 
     // recupera lista de tarefas filtradas pelo 'processId' e ordenadas pela data de expiração
@@ -81,7 +81,7 @@ api.authentication
     cancelProcessInstance(processInstanceId);
   })
   .catch(err => {
-    console.error(err.response.data);
+    console.error(err);
   });
 
 function startRequest() {
@@ -97,8 +97,8 @@ function startRequest() {
       title: 'Viagem para Curitiba',
       actionToExecute: 'Analisar',
     })
-    .then(resp => console.log('startRequest...', resp.body))
-    .catch(err => console.error(err.response.data));
+    .then(resp => console.log('startRequest...\n', resp.body))
+    .catch(err => console.error('startRequest...\n', err.response.data));
 }
 
 function startProcess() {
@@ -112,8 +112,8 @@ function startProcess() {
       requester: 'senior',
       title: 'Viagem para Curitiba',
     })
-    .then(resp => console.log('startProcess...', resp.body))
-    .catch(err => console.error(err.response.data));
+    .then(resp => console.log('startProcess...\n', resp.body))
+    .catch(err => console.error('startProcess...\n', err.response.data));
 }
 
 function getProcessesList() {
@@ -123,8 +123,8 @@ function getProcessesList() {
       onlyActiveProcesses: false,
       processFilterType: ProcessFilterType.All,
     })
-    .then(resp => console.log('getProcessesList...', resp.body))
-    .catch(err => console.error(err.response.data));
+    .then(resp => console.log('getProcessesList...\n', resp.body))
+    .catch(err => console.error('getProcessesList...\n', err.response.data));
 }
 
 function getRankingProcesses() {
@@ -133,8 +133,8 @@ function getRankingProcesses() {
       start: '2020-01-01T00:00:00.00Z',
       limit: 5,
     })
-    .then(resp => console.log('getRankingProcesses...', resp.body))
-    .catch(err => console.error(err.response.data));
+    .then(resp => console.log('getRankingProcesses...\n', resp.body))
+    .catch(err => console.error('getRankingProcesses...\n', err.response.data));
 }
 
 function findProcess() {
@@ -142,17 +142,17 @@ function findProcess() {
     .findProcess({
       id: processId,
     })
-    .then(resp => console.log('findProcess...', resp.body))
-    .catch(err => console.error(err.response.data));
+    .then(resp => console.log('findProcess...\n', resp.body))
+    .catch(err => console.error('findProcess...\n', err.response.data));
 }
 
 function getProcessInstance(processInstanceId) {
   api.workflow
     .getProcessInstance({
-      id: processInstanceId,
+      processInstance: processInstanceId,
     })
-    .then(resp => console.log('getProcessInstance...', resp.body))
-    .catch(err => console.error(err.response.data));
+    .then(resp => console.log('getProcessInstance...\n', resp.body))
+    .catch(err => console.error('getProcessInstance...\n', err.response.data));
 }
 
 function getRequestsResume() {
@@ -161,8 +161,8 @@ function getRequestsResume() {
       filterProcess: [processId],
       orders: [{ key: 'processInstanceId', value: OrderDirection.DESC }],
     })
-    .then(resp => console.log('getRequestsResume...', resp.body))
-    .catch(err => console.error(err.response.data));
+    .then(resp => console.log('getRequestsResume...\n', resp.body))
+    .catch(err => console.error('getRequestsResume...\n', err.response.data));
 }
 
 function getRequestHistoryTimeline(processInstanceId) {
@@ -170,8 +170,8 @@ function getRequestHistoryTimeline(processInstanceId) {
     .getRequestHistoryTimeline({
       processInstanceID: processInstanceId,
     })
-    .then(resp => console.log('getRequestHistoryTimeline...', resp.body))
-    .catch(err => console.error(err.response.data));
+    .then(resp => console.log('getRequestHistoryTimeline...\n', resp.body))
+    .catch(err => console.error('getRequestHistoryTimeline...\n', err.response.data));
 }
 
 function getThirdPartyRequestByStatus() {
@@ -180,8 +180,8 @@ function getThirdPartyRequestByStatus() {
       processKey: 'process_key',
       status: PendencyType.Pending,
     })
-    .then(resp => console.log('getThirdPartyRequestByStatus...', resp.body))
-    .catch(err => console.error(err.response.data));
+    .then(resp => console.log('getThirdPartyRequestByStatus...\n', resp.body))
+    .catch(err => console.error('getThirdPartyRequestByStatus...\n', err.response.data));
 }
 
 function getSubjects() {
@@ -225,7 +225,7 @@ function searchTasks() {
       filter: { processes: [processId] },
     })
     .then(resp => console.log('searchTasks...\n', resp.body))
-    .catch(err => console.error(err.response.data));
+    .catch(err => console.error('searchTasks...\n', err.response.data));
 }
 
 function getMyPendencies() {
@@ -237,7 +237,7 @@ function getMyPendencies() {
       },
     })
     .then(resp => console.log('getMyPendencies...\n', resp.body))
-    .catch(err => console.error(err.response.data));
+    .catch(err => console.error('getMyPendencies...\n', err.response.data));
 }
 
 function getPendencyProcessActions(processInstanceId) {
@@ -250,7 +250,7 @@ function getPendencyProcessActions(processInstanceId) {
       },
     })
     .then(resp => console.log('getPendencyProcessActions...\n', resp.body))
-    .catch(err => console.error(err.response.data));
+    .catch(err => console.error('getPendencyProcessActions...\n', err.response.data));
 }
 
 function changePendencyUser(processInstanceId) {
@@ -268,7 +268,7 @@ function changePendencyUser(processInstanceId) {
       },
     })
     .then(resp => console.log('changePendencyUser...\n', resp.body))
-    .catch(err => console.error(err.response.data));
+    .catch(err => console.error('changePendencyUser...\n', err.response.data));
 }
 
 /**
@@ -287,22 +287,22 @@ function addAttachmentToProcessInstance(processInstanceId) {
       api.workflow
         .commitAttachment({ id: attachmentId })
         .then(resp => {
-          console.log('commitAttachment...', resp.body);
+          console.log('commitAttachment...\n', resp.body);
 
           api.workflow
             .linkAttachments({
               ids: [attachmentId],
               processInstance: processInstanceId,
             })
-            .then(resp => console.log('linkAttachments...', resp.body))
-            .catch(err => console.error(err.response.data));
+            .then(resp => console.log('linkAttachments...\n', resp.body))
+            .catch(err => console.error('linkAttachments...\n', err.response.data));
         })
         .catch(err => {
-          console.error(err.response.data);
+          console.error('commitAttachment...\n', err.response.data);
         });
     })
     .catch(err => {
-      console.error(err.response.data);
+      console.error('newAttachment...\n', err.response.data);
     });
 }
 
@@ -322,7 +322,7 @@ function responsePendency(processInstanceId) {
       },
     })
     .then(resp => console.log('responsePendency...\n', resp.body))
-    .catch(err => console.error(err.response.data));
+    .catch(err => console.error('responsePendency...\n', err.response.data));
 }
 
 function batchPendenciesResponse(processInstanceId) {
@@ -338,7 +338,7 @@ function batchPendenciesResponse(processInstanceId) {
       authorization: api.accessToken,
     })
     .then(resp => console.log('batchPendenciesResponse...\n', resp.body))
-    .catch(err => console.error(err.response.data));
+    .catch(err => console.error('batchPendenciesResponse...\n', err.response.data));
 }
 
 function cancelProcessInstance(processInstanceId) {
@@ -348,5 +348,5 @@ function cancelProcessInstance(processInstanceId) {
       reason: 'Voo cancelado',
     })
     .then(resp => console.log('cancelProcessInstance...\n', resp.body))
-    .catch(err => console.error(err.response.data));
+    .catch(err => console.error('cancelProcessInstance...\n', err.response.data));
 }
