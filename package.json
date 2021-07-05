@@ -52,6 +52,6 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@seniorsistemas/senior-core": "^1.2.33"
+    "@seniorsistemas/senior-core": "^2.2.0"
   }
 }

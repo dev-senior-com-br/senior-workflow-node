@@ -21,7 +21,7 @@ const processId = process.env.PLATFORM_BPM_PROCESS_ID;
 const api = new PlatformAppsApi();
 
 api.authentication
-  .login(username, password)
+  .login({ username, password })
   .then(async resp => {
     console.log('login...\n', resp.body);
 

@@ -276,7 +276,7 @@ export default class Workflow extends RequestClient {
    * @param payload Objeto enviado no body da requisição.
    * @returns ClientOptions com as informações necessárias para realizar as requisições.
    */
-  private buildClientOptions<T>(primitiveUrl: string, payload: T): ClientOptions {
+  private buildClientOptions<T>(primitiveUrl: string, payload: T): ClientOptions<T> {
     return {
       url: this.getUrlPath(primitiveUrl),
       method: HttpMethod.POST,
