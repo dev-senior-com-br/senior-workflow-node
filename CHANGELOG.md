@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Adicionado projeto com `@seniorsistemas/senior-platform-apps`
+- Adicionado projeto com nome `@seniorsistemas/senior-platform-apps`
 - Adicionado resource `workflow.ts` e todos os models necessários para realizar as chamadas ao serviço de Workflow (BPM)
 - Adicionado arquivo `workflow-examples.ts` com exemplos de uso do client do Workflow
 
