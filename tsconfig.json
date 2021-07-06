@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "target": "ES6",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "baseUrl": "./",
+    "paths": {
+      "@seniorsistemas/senior-platform-apps": ["./dist"],
+      "@seniorsistemas/senior-platform-apps/*": ["./dist/*"]
+    },
+  },
+  "include": [
+    "./lib/**/*",
+    "./index.ts"
+  ],
+  "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
+}

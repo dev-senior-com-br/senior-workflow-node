@@ -1,0 +1,57 @@
+{
+  "name": "@seniorsistemas/senior-platform-apps",
+  "version": "0.0.1",
+  "description": "Biblioteca para utilização das APIs de aplicativos da plataforma da Senior Sistemas.",
+  "main": "./dist/index.js",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prebuild": "del-cli --force ./dist",
+    "build": "tsc",
+    "format": "prettier --write \"lib/**/*.ts\" \"lib/**/*.js\"",
+    "lint": "eslint",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "npm run lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-senior-com-br/senior-platform-apps-node.git"
+  },
+  "keywords": [
+    "senior",
+    "api",
+    "app",
+    "node",
+    "bpm"
+  ],
+  "author": "Senior ECOAPI Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dev-senior-com-br/senior-platform-apps-node/issues"
+  },
+  "homepage": "https://github.com/dev-senior-com-br/senior-platform-apps-node#readme",
+  "devDependencies": {
+    "@types/node": "^14.0.27",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "axios": "^0.19.2",
+    "del-cli": "^3.0.1",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.3.1",
+    "husky": "^4.2.5",
+    "prettier": "2.0.5",
+    "ts-node": "^8.10.2",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "@seniorsistemas/senior-core": "^2.2.0"
+  }
+}
